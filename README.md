@@ -1,54 +1,42 @@
-# React + TypeScript + Vite
+# Hotel Booking Site 🏨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive hotel booking website built with React, designed for global users to check availability, select dates, and reserve rooms.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📅 Calendar-based check-in & check-out date selector
+- 🛏️ Room type selection
+- 🌍 Korean time zone (KST) support with UTC storage
+- ⚠️ Booking restriction (e.g. max 6 days)
+- ❌ Disable fully-booked or holiday dates
+- 🔄 React state management with `useState` / `useEffect`
 
-## Expanding the ESLint configuration
+## 🚀 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React
+- JavaScript (ES6+)
+- CSS
+- Git & GitHub
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 📸 Screenshots
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+![Home](image.png)
+![About Page](image-1.png)
+![Room Information](image-3.png)
+![Reservation Page](image-2.png)
+![Events Page](image-4.png)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ Getting Started
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+```bash
+git clone https://github.com/jinhyun-dev/hotel-site.git
+cd hotel-project
+npm install
+npm start
+
+## 📦 Deployment
+TBD or add Vercel/Netlify URL later
+
+## 🧑‍💻 Author
+GitHub: @jinhyun-dev
+
