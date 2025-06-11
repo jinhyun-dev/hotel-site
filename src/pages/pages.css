@@ -1,0 +1,40 @@
+/* pages.css - 모든 페이지에서 공통으로 사용할 스타일 */
+
+.page-container {
+  max-width: 1200px;
+  margin: 120px auto 60px; /* Header height offset + bottom margin */
+  padding: 40px 20px;
+  min-height: 60vh;
+}
+
+.page-container h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 2px;
+  color: #333;
+}
+
+.page-container p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666;
+  text-align: center;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .page-container {
+    margin: 100px auto 40px;
+    padding: 20px 15px;
+  }
+  
+  .page-container h1 {
+    font-size: 28px;
+  }
+  
+  .page-container p {
+    font-size: 14px;
+  }
+}

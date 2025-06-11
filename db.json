@@ -1,0 +1,372 @@
+{
+  "rooms": [
+    {
+      "id": "1",
+      "name": "STANDARD",
+      "name_eng": "standard",
+      "area": 78,
+      "capacity": 2,
+      "min": 2,
+      "images": [],
+      "desc": "A comfortable and cozy basic room, ideal for relaxing after a day of business or travel. It features a king-sized bed and essential amenities.",
+      "desc_eng": "A comfortable and cozy basic room, ideal for relaxing after a day of business or travel. It features a king-sized bed and essential amenities."
+    },
+    {
+      "id": "2",
+      "name": "DELUXE",
+      "name_eng": "deluxe",
+      "area": 94,
+      "capacity": 3,
+      "min": 2,
+      "images": [],
+      "desc": "A spacious and modernly designed room with luxurious bedding and the latest facilities, ensuring a comfortable and relaxing stay.",
+      "desc_eng": "A spacious and modernly designed room with luxurious bedding and the latest facilities, ensuring a comfortable and relaxing stay."
+    },
+    {
+      "id": "3",
+      "name": "PREMIUM",
+      "name_eng": "premium",
+      "area": 105,
+      "capacity": 4,
+      "min": 2,
+      "images": [],
+      "desc": "A stylishly furnished room with elegant interiors and premium furniture, offering a luxurious atmosphere for a more relaxed and indulgent stay.",
+      "desc_eng": "A stylishly furnished room with elegant interiors and premium furniture, offering a luxurious atmosphere for a more relaxed and indulgent stay."
+    },
+    {
+      "id": "4",
+      "name": "SUITE",
+      "name_eng": "suite",
+      "area": 200,
+      "capacity": 6,
+      "min": 4,
+      "images": [],
+      "desc": "A spacious and sophisticated room with a separate living area and bedroom, offering both privacy and comfort. Premium amenities and services are included.",
+      "desc_eng": "A spacious and sophisticated room with a separate living area and bedroom, offering both privacy and comfort. Premium amenities and services are included."
+    }
+  ],
+  "season": [
+    {
+      "id": "1",
+      "name": "Off-Peak Season",
+      "start_date": "2025-10-01",
+      "end_date": "2025-06-30"
+    },
+    {
+      "id": "2",
+      "name": "Peak Season",
+      "start_date": "2025-07-01",
+      "end_date": "2025-09-30"
+    }
+  ],
+  "holiday": [
+    {
+      "id": "1",
+      "holiday_name": "신정",
+      "holiday_date": "2025-01-01"
+    },
+    {
+      "id": "2",
+      "holiday_name": "설날 연휴",
+      "holiday_date": "2025-01-28"
+    },
+    {
+      "id": "3",
+      "holiday_name": "설날",
+      "holiday_date": "2025-01-29"
+    },
+    {
+      "id": "4",
+      "holiday_name": "설날 연휴",
+      "holiday_date": "2025-01-30"
+    },
+    {
+      "id": "5",
+      "holiday_name": "3·1절",
+      "holiday_date": "2025-03-01"
+    },
+    {
+      "id": "6",
+      "holiday_name": "대체공휴일(3·1절)",
+      "holiday_date": "2025-03-03"
+    },
+    {
+      "id": "7",
+      "holiday_name": "어린이날",
+      "holiday_date": "2025-05-05"
+    },
+    {
+      "id": "8",
+      "holiday_name": "부처님 오신날",
+      "holiday_date": "2025-05-05"
+    },
+    {
+      "id": "9",
+      "holiday_name": "대체공휴일(부처님 오신날)",
+      "holiday_date": "2025-05-06"
+    },
+    {
+      "id": "10",
+      "holiday_name": "현충일",
+      "holiday_date": "2025-06-06"
+    },
+    {
+      "id": "11",
+      "holiday_name": "광복절",
+      "holiday_date": "2025-08-15"
+    },
+    {
+      "id": "12",
+      "holiday_name": "개천절",
+      "holiday_date": "2025-10-03"
+    },
+    {
+      "id": "13",
+      "holiday_name": "추석 연휴",
+      "holiday_date": "2025-10-05"
+    },
+    {
+      "id": "14",
+      "holiday_name": "추석",
+      "holiday_date": "2025-10-06"
+    },
+    {
+      "id": "15",
+      "holiday_name": "추석 연휴",
+      "holiday_date": "2025-10-07"
+    },
+    {
+      "id": "16",
+      "holiday_name": "대체공휴일(추석)",
+      "holiday_date": "2025-10-08"
+    },
+    {
+      "id": "17",
+      "holiday_name": "한글날",
+      "holiday_date": "2025-10-09"
+    },
+    {
+      "id": "18",
+      "holiday_name": "크리스마스",
+      "holiday_date": "2025-12-25"
+    }
+  ],
+  "price": [
+    {
+      "id": "1",
+      "room_id": 1,
+      "season_id": 1,
+      "weekday_price": 150000,
+      "weekend_price": 180000,
+      "holiday_price": 200000
+    },
+    {
+      "id": "2",
+      "room_id": 1,
+      "season_id": 2,
+      "weekday_price": 180000,
+      "weekend_price": 200000,
+      "holiday_price": 250000
+    },
+    {
+      "id": "3",
+      "room_id": 2,
+      "season_id": 1,
+      "weekday_price": 180000,
+      "weekend_price": 200000,
+      "holiday_price": 250000
+    },
+    {
+      "id": "4",
+      "room_id": 2,
+      "season_id": 2,
+      "weekday_price": 200000,
+      "weekend_price": 250000,
+      "holiday_price": 280000
+    },
+    {
+      "id": "5",
+      "room_id": 3,
+      "season_id": 1,
+      "weekday_price": 200000,
+      "weekend_price": 250000,
+      "holiday_price": 280000
+    },
+    {
+      "id": "6",
+      "room_id": 3,
+      "season_id": 2,
+      "weekday_price": 250000,
+      "weekend_price": 280000,
+      "holiday_price": 320000
+    },
+    {
+      "id": "7",
+      "room_id": 4,
+      "season_id": 1,
+      "weekday_price": 250000,
+      "weekend_price": 280000,
+      "holiday_price": 320000
+    },
+    {
+      "id": "8",
+      "room_id": 4,
+      "season_id": 2,
+      "weekday_price": 280000,
+      "weekend_price": 320000,
+      "holiday_price": 400000
+    }
+  ],
+  "reservation": [
+    {
+      "id": "1",
+      "customer_name": "김철수",
+      "phone_number": "01012345678",
+      "room_id": 1,
+      "check_in_date": "2025-05-01",
+      "check_out_date": "2025-05-03",
+      "number_of_guests": 2,
+      "total_price": 660000
+    },
+    {
+      "id": "2",
+      "customer_name": "박지영",
+      "phone_number": "01023456789",
+      "room_id": 3,
+      "check_in_date": "2025-05-07",
+      "check_out_date": "2025-05-09",
+      "number_of_guests": 3,
+      "total_price": 540000
+    },
+    {
+      "id": "3",
+      "customer_name": "이민호",
+      "phone_number": "01034567890",
+      "room_id": 2,
+      "check_in_date": "2025-05-03",
+      "check_out_date": "2025-05-06",
+      "number_of_guests": 2,
+      "total_price": 580000
+    },
+    {
+      "id": "4",
+      "customer_name": "최수진",
+      "phone_number": "01045678901",
+      "room_id": 4,
+      "check_in_date": "2025-05-09",
+      "check_out_date": "2025-05-12",
+      "number_of_guests": 3,
+      "total_price": 750000
+    },
+    {
+      "id": "5",
+      "customer_name": "정우성",
+      "phone_number": "01056789012",
+      "room_id": 3,
+      "check_in_date": "2025-05-10",
+      "check_out_date": "2025-05-14",
+      "number_of_guests": 4,
+      "total_price": 1000000
+    },
+    {
+      "id": "6",
+      "customer_name": "김수미",
+      "phone_number": "01067890123",
+      "room_id": 3,
+      "check_in_date": "2025-06-15",
+      "check_out_date": "2025-05-18",
+      "number_of_guests": 4,
+      "total_price": 1000000
+    },
+    {
+      "id": "7",
+      "customer_name": "박상혁",
+      "phone_number": "01078901234",
+      "room_id": 4,
+      "check_in_date": "2025-06-01",
+      "check_out_date": "2025-06-05",
+      "number_of_guests": 4,
+      "total_price": 1000000
+    },
+    {
+      "id": "8",
+      "customer_name": "이혜진",
+      "phone_number": "01089012345",
+      "room_id": 4,
+      "check_in_date": "2025-06-03",
+      "check_out_date": "2025-06-06",
+      "number_of_guests": 4,
+      "total_price": 1000000
+    },
+    {
+      "id": "9",
+      "customer_name": "김하늘",
+      "phone_number": "01090123456",
+      "room_id": 1,
+      "check_in_date": "2025-06-07",
+      "check_out_date": "2025-06-10",
+      "number_of_guests": 2,
+      "total_price": 600000
+    },
+    {
+      "id": "10",
+      "customer_name": "오진우",
+      "phone_number": "01001234567",
+      "room_id": 2,
+      "check_in_date": "2025-06-10",
+      "check_out_date": "2025-06-12",
+      "number_of_guests": 3,
+      "total_price": 864000
+    },
+    {
+      "id": "2ddc",
+      "customer_name": "test",
+      "phone_number": "1",
+      "room_id": "2",
+      "check_in_date": "2025-06-09",
+      "check_out_date": "2025-06-13",
+      "number_of_guests": 2,
+      "total_price": 600000
+    },
+    {
+      "id": "749b",
+      "customer_name": "test2325",
+      "phone_number": "1",
+      "room_id": "1",
+      "check_in_date": "2025-06-23",
+      "check_out_date": "2025-06-25",
+      "number_of_guests": 2,
+      "total_price": 300000
+    },
+    {
+      "id": "160d",
+      "customer_name": "testguy1620",
+      "phone_number": "1",
+      "room_id": "3",
+      "check_in_date": "2025-06-16",
+      "check_out_date": "2025-06-20",
+      "number_of_guests": 3,
+      "total_price": 720000
+    },
+    {
+      "id": "0974",
+      "customer_name": "test1111",
+      "phone_number": "1",
+      "room_id": "2",
+      "check_in_date": "2025-06-14",
+      "check_out_date": "2025-06-19",
+      "number_of_guests": 3,
+      "total_price": 1080000
+    },
+    {
+      "id": "6931",
+      "customer_name": "test11111",
+      "phone_number": "000",
+      "room_id": "1",
+      "check_in_date": "2025-06-11",
+      "check_out_date": "2025-06-16",
+      "number_of_guests": 3,
+      "total_price": 900000
+    }
+  ]
+}

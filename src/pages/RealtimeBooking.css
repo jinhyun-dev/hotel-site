@@ -1,0 +1,1144 @@
+.realtime-booking-page {
+  margin-top: 88px;
+  width: 100vw;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Loading */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  font-size: 18px;
+  color: #666;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Hero Section */
+.booking-hero {
+  height: 300px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.hero-overlay h1 {
+  font-size: 48px;
+  font-weight: 400;
+  margin: 0 0 10px 0;
+  letter-spacing: 3px;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.hero-overlay p {
+  font-size: 16px;
+  margin: 0;
+  opacity: 0.9;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 300;
+}
+
+/* Room Selection Section */
+.room-selection-section {
+  padding: 80px 0;
+  background-color: #f8f8f8;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.room-selection-section h2 {
+  font-size: 36px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 60px;
+  color: #2c2c2c;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Rooms Grid */
+.rooms-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-bottom: 60px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f8f8f8; 
+  padding: 20px;
+}
+
+.room-card2 {
+  width: 100%;
+  height: 220px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.room-card2:hover {
+  transform: scale(1.02);
+  z-index: 2;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Room Background Images */
+.room-type-1 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+                    url('https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80');
+}
+
+.room-type-2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+                    url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80');
+}
+
+.room-type-3 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+                    url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80');
+}
+
+.room-type-4 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+                    url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80');
+}
+
+.room-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.room-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  transition: all 0.3s ease;
+}
+
+.room-card2:hover .room-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.room-overlay h3 {
+  color: white;
+  font-size: 42px;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.arrow {
+  color: white;
+  font-size: 42px;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease;
+  opacity: 0.8;
+}
+
+.room-card2:hover .arrow {
+  transform: translateX(15px);
+  opacity: 1;
+}
+
+/* Booking Info */
+.booking-info {
+  background: white;
+  padding: 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.booking-info h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  color: #2c2c2c;
+  background-color: #e0e0e0;
+  padding: 20px 40px;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.booking-info ul {
+  list-style: none;
+  padding: 30px 40px;
+  margin: 0;
+}
+
+.booking-info li {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #666;
+  margin-bottom: 12px;
+  padding-left: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 300;
+}
+
+/* Calendar Section - 2단계 */
+.calendar-section {
+  padding: 60px 0;
+  background-color: #f8f8f8;
+}
+
+.calendar-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Room Info Side */
+.room-info-side {
+  background: white;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.selected-room-card2 {
+  padding: 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.selected-room-card2 h3 {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0 0 20px 0;
+  color: #2c2c2c;
+  text-align: center;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.room-image-small {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.room-image-small img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.room-image-small:hover img {
+  transform: scale(1.05);
+}
+
+.room-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 300;
+}
+
+.room-price {
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.price-label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 300;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d5a27;
+  background: #f0f7f0;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 2px solid #2d5a27;
+  display: inline-block;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Guest Selection */
+.guest-selection {
+  padding: 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.guest-selection h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  color: #2c2c2c;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.guest-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.guest-btn {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #333;
+  background: white;
+  color: #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.guest-btn:hover {
+  background: rgb(45, 146, 45);
+  color: white;
+}
+
+.guest-btn:active {
+  transform: scale(0.95);
+}
+
+.guest-count {
+  font-size: 20px;
+  font-weight: 600;
+  min-width: 40px;
+  text-align: center;
+  color: #2c2c2c;
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.capacity-info {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 300;
+}
+
+.additional-cost-info {
+  font-size: 11px;
+  color: #ff6b35;
+  text-align: center;
+  margin: 5px 0 0 0;
+  font-weight: 500;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Total Price */
+.total-price {
+  padding: 30px;
+}
+
+.total-price h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  color: #2c2c2c;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.total-amount {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2d5a27;
+  display: block;
+  text-align: center;
+  background: #f0f7f0;
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid #2d5a27;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.nights-info {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  margin: 5px 0 0 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 300;
+}
+
+/* Calendar Main */
+.calendar-main {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.calendar-header h3 {
+  font-size: 20px;
+  font-weight: 400;
+  color: #2c2c2c;
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.nav-btn {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #333;
+  background: white;
+  color: #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.nav-btn:hover {
+  background: rgb(45, 146, 45);
+  color: white;
+  transform: scale(1.05);
+}
+
+.calendar-grid {
+  width: 100%;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  margin-bottom: 10px;
+}
+
+.weekday {
+  padding: 15px 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+.calendar-day {
+  position: relative;
+  min-height: 50px;
+  padding: 8px;
+  border: 1px solid #f0f0f0;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-day:hover:not(.past):not(.other-month) {
+  background: #f8f8f8;
+}
+
+.calendar-day.other-month {
+  color: #ccc;
+  background: #e3e3e4;
+  cursor: not-allowed;
+}
+
+.calendar-day.past {
+  color: #ccc;
+  background: #e3e3e4;
+  cursor: not-allowed;
+}
+
+.calendar-day.check-in {
+  background: #4CAF50;
+  color: white;
+}
+
+.calendar-day.check-out {
+  background: #2196F3;
+  color: white;
+}
+
+.calendar-day.in-range {
+  background: #4CAF50;
+  color: #333;
+}
+
+/* 일요일 빨간색 텍스트 */
+.calendar-day.sunday .day-number {
+  color: #ff4444;
+  font-weight: bold;
+}
+
+.calendar-day.sunday.check-in .day-number,
+.calendar-day.sunday.check-out .day-number {
+  color: white; /* 체크인/체크아웃일 때는 흰색 유지 */
+}
+
+.day-number {
+  font-size: 14px;
+  font-weight: 500;
+  color: black;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.check-label {
+  font-size: 10px;
+  margin-top: 2px;
+  font-weight: 600;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.calendar-day.unavailable {
+  background: pink;
+  color: #f44336;
+  cursor: not-allowed;
+}
+
+.calendar-day.holiday {
+  position: relative;
+}
+
+.holiday-dot {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  background: #2196F3;
+  border-radius: 50%;
+}
+
+.unavailable-label {
+  font-size: 9px;
+  color: #f44336;
+  font-weight: 600;
+  margin-top: 2px;
+  text-align: center;
+  line-height: 1;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Calendar Legend */
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  padding: 15px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-text {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.holiday-legend {
+  background: #2196F3;
+}
+
+.unavailable-legend {
+  background: #f44336;
+}
+
+/* Booking Actions */
+.booking-actions {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.next-btn {
+  background: #ddd;
+  color: #999;
+  border: none;
+  padding: 15px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.next-btn.active {
+  background: #2d5a27;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(45, 90, 39, 0.3);
+}
+
+.next-btn.active:hover {
+  background: #1e3d1a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(45, 90, 39, 0.4);
+}
+
+.back-btn {
+  background: #f8f8f8;
+  color: #666;
+  border: 2px solid #ddd;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  width: 100%;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.back-btn:hover {
+  background: rgb(45, 146, 45);
+  color: white;
+  border-color: #333;
+}
+
+/* Booking Form Section - 3단계 */
+.booking-form-section {
+  padding: 60px 0;
+  background-color: #f8f8f8;
+}
+
+.form-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.form-main {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.form-main h2 {
+  font-size: 28px;
+  font-weight: 400;
+  margin: 0 0 40px 0;
+  color: #2c2c2c;
+  text-align: center;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c2c2c;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.form-value {
+  background: #f8f8f8;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #2c2c2c;
+  border: 1px solid #e0e0e0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 300;
+}
+
+.form-group input {
+  padding: 12px 16px;
+  color: black;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 300;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #333;
+}
+
+.form-group input.error {
+  border-color: #ff4444;
+}
+
+.error-text {
+  font-size: 12px;
+  color: #ff4444;
+  margin-top: 5px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 300;
+}
+
+.total-price-display {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2d5a27;
+  text-align: center;
+  padding: 20px;
+  background: #f0f7f0;
+  border-radius: 8px;
+  border: 2px solid #2d5a27;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.nights-detail {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  font-weight: 300;
+  margin-top: 5px;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.form-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.form-actions .back-btn {
+  background: #f8f8f8;
+  color: #666;
+  border: 2px solid #ddd;
+  padding: 15px 30px;
+  font-weight: 600;
+  margin: 0;
+  width: auto;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.form-actions .back-btn:hover {
+  background: rgb(45, 146, 45);
+  color: white;
+  border-color: #333;
+}
+
+.submit-btn {
+  background: #2d5a27;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(45, 90, 39, 0.3);
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.submit-btn:hover {
+  background: #1e3d1a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(45, 90, 39, 0.4);
+}
+
+/* Calendar Sidebar */
+.calendar-sidebar {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.calendar-grid-small {
+  margin-top: 20px;
+}
+
+.weekdays-small {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 10px;
+}
+
+.weekday-small {
+  padding: 8px 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.days-grid-small {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar-day-small {
+  min-height: 30px;
+  padding: 4px;
+  text-align: center;
+  font-size: 12px;
+  border: 1px solid #f0f0f0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 300;
+}
+
+.calendar-day-small.other-month {
+  color: #ccc;
+  background: #fafafa;
+}
+
+.calendar-day-small.selected {
+  background: #4CAF50;
+  color: white;
+}
+
+.calendar-day-small.in-range {
+  background: #4CAF50;
+}
+
+/* Warning & Complete Modals */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.warning-modal,
+.complete-modal {
+  background: white;
+  border-radius: 8px;
+  padding: 40px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.warning-modal h3,
+.complete-modal h3 {
+  font-size: 18px;
+  font-weight: 400;
+  color: #2c2c2c;
+  margin: 0 0 30px 0;
+  line-height: 1.5;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.modal-confirm-btn {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 80px;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.modal-confirm-btn:hover {
+  background: #555;
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .calendar-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .form-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .calendar-legend {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .booking-hero {
+    height: 250px;
+  }
+  
+  .hero-overlay h1 {
+    font-size: 36px;
+  }
+  
+  .room-selection-section {
+    padding: 60px 0;
+  }
+  
+  .room-selection-section h2 {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+  
+  .rooms-grid {
+    max-width: 95%;
+    margin: 0 auto 40px auto;
+  }
+  
+  .room-card2 {
+    height: 180px;
+  }
+  
+  .room-overlay {
+    padding: 0 30px;
+  }
+  
+  .room-overlay h3 {
+    font-size: 28px;
+    letter-spacing: 2px;
+  }
+  
+  .arrow {
+    font-size: 28px;
+  }
+  
+  .booking-info {
+    margin: 0 20px;
+  }
+  
+  .booking-info h3 {
+    padding: 15px 25px;
+    font-size: 18px;
+  }
+  
+  .booking-info ul {
+    padding: 25px;
+  }
+  
+  .booking-info li {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  
+  .calendar-main {
+    padding: 30px 20px;
+  }
+  
+  .form-main {
+    padding: 30px 20px;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .calendar-sidebar {
+    order: -1;
+  }
+  
+  .calendar-legend {
+    gap: 10px;
+    justify-content: flex-start;
+  }
+  
+  .legend-text {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .room-card2 {
+    height: 160px;
+  }
+  
+  .room-overlay {
+    padding: 0 20px;
+  }
+  
+  .room-overlay h3 {
+    font-size: 24px;
+    letter-spacing: 1px;
+  }
+  
+  .arrow {
+    font-size: 24px;
+  }
+  
+  .booking-info h3 {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+  
+  .booking-info ul {
+    padding: 20px;
+  }
+  
+  .calendar-day {
+    min-height: 40px;
+    padding: 4px;
+  }
+  
+  .day-number {
+    font-size: 12px;
+  }
+  
+  .check-label {
+    font-size: 8px;
+  }
+  
+  .unavailable-label {
+    font-size: 8px;
+  }
+  
+  .calendar-legend {
+    gap: 8px;
+    padding: 10px;
+  }
+  
+  .legend-dot {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .legend-text {
+    font-size: 10px;
+  }
+}

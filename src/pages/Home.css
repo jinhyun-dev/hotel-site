@@ -1,0 +1,489 @@
+.home {
+  margin-top: 88px; /* Header height offset */
+  width: 100vw;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Hero Section with Auto Swiper */
+.hero-section {
+  height: 60vh;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  user-select: none; /* 드래그 중 텍스트 선택 방지 */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  color: white;
+  font-size: 48px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.see-more-btn {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 12px 30px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+}
+
+.see-more-btn:hover {
+  background: white;
+  color: #333;
+}
+
+.hero-dots {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  gap: 12px;
+  z-index: 2;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: white;
+  transform: scale(1.2);
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 36px;
+  font-weight: 400;
+  text-align: center;
+  margin: 80px 0 60px 0;
+  letter-spacing: 2px;
+  color: #333;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Rooms Section with Free Mode */
+.rooms-section {
+  padding: 60px 0;
+  background-color: white;
+}
+
+.rooms-section .section-title {
+  color: #333;
+}
+
+.rooms-grid2 {
+  display: flex;
+  gap: 40px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding: 20px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: grab;
+}
+
+.rooms-grid2::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.rooms-grid2:active {
+  cursor: grabbing;
+}
+
+.room-card {
+  flex: 0 0 auto;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.room-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none; /* 이미지 드래그 방지 */
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+.room-card:hover img {
+  transform: scale(1.05);
+}
+
+.room-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: white;
+  padding: 30px 20px 20px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.room-card:hover .room-card-overlay {
+  transform: translateY(0);
+}
+
+.room-card-overlay h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Event Section */
+.event-section {
+  padding: 80px 0;
+  background-color: #f8f8f8;
+}
+
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.event-card {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+}
+
+.event-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.event-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.event-card h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Best Hotel Section */
+.best-hotel-section {
+  height: 400px;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+              url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.best-hotel-overlay {
+  width: 100%;
+}
+
+.award-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.best-hotel-section h2 {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.best-hotel-section p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 300;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: scale(0.8) translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-image-container {
+  width: 100%;
+  max-height: 70vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-image-container img {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+}
+
+.modal-info {
+  padding: 20px 30px;
+  background: white;
+  text-align: center;
+}
+
+.modal-info h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 1px;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    height: 50vh;
+    min-height: 350px;
+  }
+  
+  .hero-content h1 {
+    font-size: 32px;
+  }
+  
+  .section-title {
+    font-size: 28px;
+    margin: 60px 0 40px 0;
+  }
+  
+  .rooms-grid2 {
+    gap: 20px;
+    padding: 0 20px;
+  }
+  
+  .room-card {
+    width: 220px;
+    height: 300px;
+  }
+  
+  .event-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .event-image {
+    height: 150px;
+  }
+  
+  .event-card h3 {
+    font-size: 14px;
+  }
+  
+  .best-hotel-section {
+    height: 300px;
+  }
+  
+  .best-hotel-section h2 {
+    font-size: 28px;
+  }
+  
+  .best-hotel-section p {
+    font-size: 16px;
+    padding: 0 20px;
+  }
+  
+  /* Modal 모바일 최적화 */
+  .modal-overlay {
+    padding: 10px;
+  }
+  
+  .modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+  
+  .modal-image-container {
+    max-height: 60vh;
+  }
+  
+  .modal-info {
+    padding: 15px 20px;
+  }
+  
+  .modal-info h3 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .room-card {
+    width: 180px;
+    height: 240px;
+  }
+  
+  .rooms-grid2 {
+    gap: 15px;
+  }
+  
+  /* 모바일에서 room card overlay 항상 표시 */
+  .room-card-overlay {
+    transform: translateY(0);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    padding: 20px 15px 15px;
+  }
+  
+  .room-card-overlay h3 {
+    font-size: 16px;
+  }
+  
+  /* 모바일 모달 추가 최적화 */
+  .modal-image-container {
+    max-height: 50vh;
+  }
+  
+  .modal-info h3 {
+    font-size: 18px;
+  }
+}
