@@ -2,14 +2,14 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
-// Firebase 설정 (실제 프로젝트 설정값)
+// Firebase 설정 (환경변수 사용)
 const firebaseConfig = {
-  apiKey: "AIzaSyB-_L80d-_GSsLoRB75qo1tFmUyyie9SsA",
-  authDomain: "hotel-site-2561f.firebaseapp.com",
-  projectId: "hotel-site-2561f",
-  storageBucket: "hotel-site-2561f.firebasestorage.app",
-  messagingSenderId: "230120772610",
-  appId: "1:230120772610:web:38122bb51e0dee2a5d831b"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 // Firebase 초기화
