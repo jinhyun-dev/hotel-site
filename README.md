@@ -1,6 +1,11 @@
 # Hotel Booking Site 🏨
 
-A responsive hotel booking website built with React, designed for global users to check availability, select dates, and reserve rooms.
+A responsive hotel booking website built with React and Firebase, designed for global users to check availability, select dates, and reserve rooms in real-time.
+
+
+🔗 Live Demo
+
+## 🌐 https://hotel-booking-app-azure.vercel.app
 
 ## ✨ Features
 
@@ -10,6 +15,7 @@ A responsive hotel booking website built with React, designed for global users t
 - 🌍 Korean time zone (KST) support with UTC storage
 - ⚠️ Booking restriction (e.g. max 6 days)
 - ❌ Disable fully-booked or holiday dates
+- 📱 Responsive Design
 - 🔄 React state management with `useState` / `useEffect`
 
 ## 🚀 Tech Stack
@@ -19,6 +25,7 @@ A responsive hotel booking website built with React, designed for global users t
 - CSS
 - Git & GitHub
 - Firebase Firestore
+- Vercel
 
 ## 📸 Screenshots
 
@@ -37,7 +44,7 @@ npm install
 npm run dev
 
 ## 📦 Deployment
-TBD or add Vercel/Netlify URL later
+Deployed on Vercel
 
 ## 🧑‍💻 Author
 GitHub: @jinhyun-dev
