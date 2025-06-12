@@ -450,7 +450,7 @@
   justify-content: center;
 }
 
-.btn-primary, .btn-secondary {
+.btn-primary, .btn-secondary4 {
   padding: 15px 40px;
   font-size: 1rem;
   text-decoration: none;
@@ -471,13 +471,13 @@
   transform: translateY(-2px);
 }
 
-.btn-secondary {
+.btn-secondary4 {
   background: transparent;
   color: #2c2c2c;
   border: 2px solid #2c2c2c;
 }
 
-.btn-secondary:hover {
+.btn-secondary4:hover {
   background: #2c2c2c;
   color: white;
 }
@@ -638,7 +638,7 @@
   }
   
   .btn-primary,
-  .btn-secondary {
+  .btn-secondary4 {
     width: 200px;
   }
 }

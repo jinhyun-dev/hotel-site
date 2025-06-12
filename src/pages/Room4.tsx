@@ -212,7 +212,7 @@ const Room4: React.FC = () => {
               <p>Experience presidential-level luxury in our exclusive suite</p>
               <div className="action-buttons">
                 <a href="/reservation" className="btn-primary">Reserve Suite</a>
-                <a href="/contact" className="btn-secondary">Contact Us</a>
+                <a href="/contact" className="btn-secondary4">Contact Us</a>
               </div>
             </div>
           </div>

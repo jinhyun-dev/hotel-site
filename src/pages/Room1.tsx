@@ -179,7 +179,7 @@ const Room1: React.FC = () => {
               <p>Experience the comfort and elegance of our Standard Room</p>
               <div className="action-buttons">
                 <a href="/reservation" className="btn-primary">Book Now</a>
-                <a href="/contact" className="btn-secondary">Contact Us</a>
+                <a href="/contact" className="btn-secondary4">Contact Us</a>
               </div>
             </div>
           </div>

@@ -180,7 +180,7 @@ const Room2: React.FC = () => {
               <p>Indulge in the enhanced luxury of our Deluxe Room</p>
               <div className="action-buttons">
                 <a href="/reservation" className="btn-primary">Book Now</a>
-                <a href="/contact" className="btn-secondary">Contact Us</a>
+                <a href="/contact" className="btn-secondary4">Contact Us</a>
               </div>
             </div>
           </div>
