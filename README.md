@@ -24,6 +24,7 @@ A responsive hotel booking website built with React and Firebase, designed for g
 - JavaScript (ES6+)
 - CSS
 - Git & GitHub
+- Figma (Implemented UI based on Figma design references)
 - Firebase Firestore
 - Vercel
 
