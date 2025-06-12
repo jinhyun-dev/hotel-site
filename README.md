@@ -4,6 +4,7 @@ A responsive hotel booking website built with React, designed for global users t
 
 ## ✨ Features
 
+- 🔥 Firebase Firestore integration for live booking updates
 - 📅 Calendar-based check-in & check-out date selector
 - 🛏️ Room type selection
 - 🌍 Korean time zone (KST) support with UTC storage
@@ -13,17 +14,18 @@ A responsive hotel booking website built with React, designed for global users t
 
 ## 🚀 Tech Stack
 
-- React
+- React with TypeScript
 - JavaScript (ES6+)
 - CSS
 - Git & GitHub
+- Firebase Firestore
 
 ## 📸 Screenshots
 
 ![Home](image.png)
 ![About Page](image-1.png)
-![Room Information](image-3.png)
-![Reservation Page](image-2.png)
+![Room Information](image-2.png)
+![Reservation Page](image-3.png)
 ![Events Page](image-4.png)
 
 ## 🛠️ Getting Started
