@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { getRooms, getSeasons, getPrices } from '../firebase/services';
 import './Booking.css';
 
 interface Room {
-  id: number;
+  id: string;
+  originalId?: number;
   name: string;
   name_eng: string;
   area: number;
@@ -12,14 +14,16 @@ interface Room {
 }
 
 interface Season {
-  id: number;
+  id: string;
+  originalId?: number;
   name: string;
   start_date: string;
   end_date: string;
 }
 
 interface Price {
-  id: number;
+  id: string;
+  originalId?: number;
   room_id: number;
   season_id: number;
   weekday_price: number;
@@ -32,68 +36,62 @@ const Booking: React.FC = () => {
   const [seasons, setSeasons] = useState<Season[]>([]);
   const [prices, setPrices] = useState<Price[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  // 중복 로딩 방지를 위한 ref
+  const hasFetched = useRef(false);
 
   useEffect(() => {
+    // 이미 데이터를 가져왔다면 중복 실행 방지
+    if (hasFetched.current) {
+      console.log('🔄 중복 요청 방지: 이미 데이터를 가져왔습니다.');
+      return;
+    }
+
     const fetchData = async () => {
       try {
+        hasFetched.current = true;
+        setLoading(true);
+        console.log('🔥 Booking 컴포넌트: Firebase에서 데이터 가져오는 중...');
         
-        const [roomsRes, seasonsRes, pricesRes] = await Promise.all([
-          fetch('http://localhost:3001/rooms'),
-          fetch('http://localhost:3001/season'),
-          fetch('http://localhost:3001/price')
+        const [roomsData, seasonsData, pricesData] = await Promise.all([
+          getRooms(),
+          getSeasons(),
+          getPrices()
         ]);
 
-
-        const roomsData = await roomsRes.json();
-        const seasonsData = await seasonsRes.json();
-        const pricesData = await pricesRes.json();
-
+        console.log('✅ Booking 데이터 로드 완료:', {
+          rooms: roomsData.length,
+          seasons: seasonsData.length,
+          prices: pricesData.length
+        });
 
         setRooms(roomsData);
         setSeasons(seasonsData);
         setPrices(pricesData);
-        setLoading(false);
       } catch (error) {
-        console.error('Failed to load data:', error);
+        console.error('❌ Booking Firebase 데이터 로드 실패:', error);
+        // 에러 발생시 재시도를 위해 플래그 리셋
+        hasFetched.current = false;
+      } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
 
-  const getPriceForRoom = (roomId: number, seasonId: number) => {
+    // cleanup 함수에서 플래그 리셋 (개발 모드에서 StrictMode로 인한 언마운트 시)
+    return () => {
+      console.log('🧹 Booking 컴포넌트 cleanup');
+    };
+  }, []); // 빈 의존성 배열로 마운트 시 한 번만 실행
 
-    // 첫 번째 호출에서만 전체 데이터 확인
-    if (roomId == 1 && seasonId == 1) {
-      
-      // 각 가격 객체의 타입 확인
-      prices.forEach((price, index) => {
-        console.log(`Price ${index}:`, {
-          room_id: price.room_id,
-          room_id_type: typeof price.room_id,
-          season_id: price.season_id,
-          season_id_type: typeof price.season_id
-        });
-      });
-    }
-    
+  // Firebase에서 가져온 데이터의 originalId를 사용하여 가격 찾기
+  const getPriceForRoom = (roomOriginalId: number, seasonOriginalId: number) => {
     const price = prices.find(price => {
       const priceRoomId = Number(price.room_id);
       const priceSeasonId = Number(price.season_id);
-      const match = priceRoomId == roomId && priceSeasonId == seasonId;
-      
-      // 매칭 시도 로그 (첫 번째 방만)
-      if (roomId == 1) {
-        console.log(`매칭 시도: ${priceRoomId} == ${roomId} && ${priceSeasonId} == ${seasonId} => ${match}`);
-      }
-      
-      return match;
+      return priceRoomId === roomOriginalId && priceSeasonId === seasonOriginalId;
     });
-    
-    if (!price && roomId == 1) {
-      console.log(`가격을 찾을 수 없음: roomId=${roomId}, seasonId=${seasonId}`);
-    }
     
     return price;
   };
@@ -105,7 +103,7 @@ const Booking: React.FC = () => {
   if (loading) {
     return (
       <div className="booking-page">
-        <div className="loading">Loading data...</div>
+        <div className="loading">🔥 Loading data from Firebase...</div>
       </div>
     );
   }
@@ -116,7 +114,7 @@ const Booking: React.FC = () => {
       <section className="booking-hero">
         <div className="hero-overlay">
           <h1>BOOKING INFORMATION</h1>
-          <div class="divider"></div>
+          <div className="divider"></div>
           <p>Rates & Policies</p>
         </div>
       </section>
@@ -135,12 +133,12 @@ const Booking: React.FC = () => {
                   <th rowSpan={2}>Size</th>
                   <th rowSpan={2}>Occupancy</th>
                   <th colSpan={3}>
-                    {seasons.find(s => s.id == 1)?.name || 'Low Season'}<br />
-                    ({seasons.find(s => s.id == 1)?.start_date?.slice(5).replace('-', '.') || '10.01'}~{seasons.find(s => s.id == 1)?.end_date?.slice(5).replace('-', '.') || '06.30'})
+                    {seasons.find(s => s.originalId === 1)?.name || 'Off-Peak Season'}<br />
+                    ({seasons.find(s => s.originalId === 1)?.start_date?.slice(5).replace('-', '.') || '10.01'}~{seasons.find(s => s.originalId === 1)?.end_date?.slice(5).replace('-', '.') || '06.30'})
                   </th>
                   <th colSpan={3}>
-                    {seasons.find(s => s.id == 2)?.name || 'High Season'}<br />
-                    ({seasons.find(s => s.id == 2)?.start_date?.slice(5).replace('-', '.') || '07.01'}~{seasons.find(s => s.id == 2)?.end_date?.slice(5).replace('-', '.') || '09.30'})
+                    {seasons.find(s => s.originalId === 2)?.name || 'Peak Season'}<br />
+                    ({seasons.find(s => s.originalId === 2)?.start_date?.slice(5).replace('-', '.') || '07.01'}~{seasons.find(s => s.originalId === 2)?.end_date?.slice(5).replace('-', '.') || '09.30'})
                   </th>
                 </tr>
                 <tr>
@@ -154,8 +152,9 @@ const Booking: React.FC = () => {
               </thead>
               <tbody>
                 {rooms.map(room => {
-                  const lowSeasonPrice = getPriceForRoom(room.id, 1);
-                  const highSeasonPrice = getPriceForRoom(room.id, 2);
+                  const roomOriginalId = room.originalId || 1;
+                  const lowSeasonPrice = getPriceForRoom(roomOriginalId, 1);
+                  const highSeasonPrice = getPriceForRoom(roomOriginalId, 2);
 
                   return (
                     <tr key={room.id}>
@@ -175,10 +174,8 @@ const Booking: React.FC = () => {
             </table>
           </div>
 
-
           {/* Info Cards */}
           <div className="info-cards-section">
-            
             <div className="info-cards">
               <div className="info-card">
                 <h4>Check-in & Check-out</h4>
@@ -214,6 +211,15 @@ const Booking: React.FC = () => {
               <li>Special cancellation policies may apply during peak seasons and holidays</li>
               <li>Refunds will be processed within 3-5 business days after cancellation</li>
             </ul>
+          </div>
+
+          {/* Firebase Info Banner */}
+          <div className="firebase-info-banner">
+            <div className="firebase-icon">🔥</div>
+            <div className="firebase-text">
+              <h4>Real-time Data</h4>
+              <p>All pricing information is powered by Firebase and updated in real-time.</p>
+            </div>
           </div>
         </div>
       </section>

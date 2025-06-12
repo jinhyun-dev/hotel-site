@@ -1,8 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './RealtimeBooking.css';
+import { 
+  getRooms, 
+  getSeasons, 
+  getHolidays, 
+  getPrices, 
+  getReservations,
+  addReservation,
+  checkDataExists,
+  migrateDataToFirebase,
+  resetFirebaseData
+} from '../firebase/services';
 
+// ... 기존 인터페이스들 동일 ...
 interface Room {
-  id: number;
+  id: string;
+  originalId?: number;
   name: string;
   name_eng: string;
   area: number;
@@ -14,20 +27,23 @@ interface Room {
 }
 
 interface Season {
-  id: number;
+  id: string;
+  originalId?: number;
   name: string;
   start_date: string;
   end_date: string;
 }
 
 interface Holiday {
-  id: number;
+  id: string;
+  originalId?: number;
   holiday_name: string;
   holiday_date: string;
 }
 
 interface Price {
-  id: number;
+  id: string;
+  originalId?: number;
   room_id: number;
   season_id: number;
   weekday_price: number;
@@ -36,7 +52,7 @@ interface Price {
 }
 
 interface Reservation {
-  id: number;
+  id: string;
   customer_name: string;
   phone_number: string;
   room_id: number;
@@ -74,6 +90,10 @@ const RealtimeBooking: React.FC = () => {
   const [selectingCheckOut, setSelectingCheckOut] = useState(false);
   const [showWarningModal, setShowWarningModal] = useState(false);
   const [showCompleteModal, setShowCompleteModal] = useState(false);
+  const [showResetModal, setShowResetModal] = useState(false);
+
+  // 중복 로딩 방지를 위한 ref
+  const hasFetched = useRef(false);
 
   // KST 기준 현재 날짜 가져오기
   const getKSTDate = (): Date => {
@@ -131,85 +151,123 @@ const RealtimeBooking: React.FC = () => {
     return 'https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600&q=80';
   };
 
+  // Firebase 데이터 리셋 핸들러
+  const handleDataReset = async () => {
+    try {
+      setLoading(true);
+      console.log('🔥 Firebase 데이터 리셋 시작...');
+      
+      // 데이터베이스 완전 초기화
+      await resetFirebaseData();
+      
+      // 새로운 데이터 마이그레이션
+      await migrateDataToFirebase(true);
+      
+      // 데이터 다시 로드
+      const [roomsData, seasonsData, holidaysData, pricesData, reservationsData] = await Promise.all([
+        getRooms(),
+        getSeasons(),
+        getHolidays(),
+        getPrices(),
+        getReservations()
+      ]);
+
+      setRooms(roomsData);
+      setSeasons(seasonsData);
+      setHolidays(holidaysData);
+      setPrices(pricesData);
+      setReservations(reservationsData);
+      
+      setShowResetModal(false);
+      alert('데이터 리셋이 완료되었습니다!');
+      
+    } catch (error) {
+      console.error('❌ 데이터 리셋 실패:', error);
+      alert('데이터 리셋에 실패했습니다.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Firebase에서 데이터 가져오기
   useEffect(() => {
-    const fetchData = async () => {
+    // 이미 데이터를 가져왔다면 중복 실행 방지
+    if (hasFetched.current) {
+      console.log('🔄 중복 요청 방지: 이미 데이터를 가져왔습니다.');
+      return;
+    }
+
+    const fetchDataFromFirebase = async () => {
       try {
-        console.log('Data fetching started...');
-        
-        // 먼저 개별 엔드포인트들 확인
-        const endpoints = [
-          'http://localhost:3001/rooms',
-          'http://localhost:3001/season', 
-          'http://localhost:3001/holiday',
-          'http://localhost:3001/price',
-          'http://localhost:3001/reservation'
-        ];
-        
-        for (const endpoint of endpoints) {
-          try {
-            const response = await fetch(endpoint);
-            console.log(`${endpoint}: ${response.status} ${response.ok ? '✅' : '❌'}`);
-          } catch (err) {
-            console.log(`${endpoint}: Connection failed ❌`);
+        hasFetched.current = true;
+        setLoading(true);
+        console.log('🔥 RealtimeBooking: Firebase에서 데이터 가져오는 중...');
+
+        // 데이터가 존재하는지 확인
+        const dataCheck = await checkDataExists();
+        console.log('📊 데이터 체크 결과:', dataCheck);
+
+        // 데이터가 없거나 잘못된 경우에만 마이그레이션 실행
+        if (dataCheck.needsMigration) {
+          console.log('📦 데이터 마이그레이션이 필요합니다...');
+          
+          // 잘못된 데이터가 있으면 리셋 모달 표시
+          if (dataCheck.total > 0 && !dataCheck.isValid) {
+            console.log('⚠️ 잘못된 데이터가 감지되어 리셋 모달을 표시합니다.');
+            setShowResetModal(true);
+            setLoading(false);
+            return;
+          }
+          
+          // 데이터가 아예 없으면 바로 마이그레이션
+          if (dataCheck.total === 0) {
+            await migrateDataToFirebase(false);
           }
         }
-        
-        // 실제 데이터 가져오기
-        const [roomsRes, seasonsRes, holidaysRes, pricesRes, reservationsRes] = await Promise.all([
-          fetch('http://localhost:3001/rooms'),
-          fetch('http://localhost:3001/season'),
-          fetch('http://localhost:3001/holiday'),
-          fetch('http://localhost:3001/price'),
-          fetch('http://localhost:3001/reservation')
+
+        // 모든 데이터 가져오기
+        const [roomsData, seasonsData, holidaysData, pricesData, reservationsData] = await Promise.all([
+          getRooms(),
+          getSeasons(),
+          getHolidays(),
+          getPrices(),
+          getReservations()
         ]);
 
-        const roomsData = await roomsRes.json();
-        const seasonsData = await seasonsRes.json();
-        const holidaysData = await holidaysRes.json();
-        const pricesData = await pricesRes.json();
-        const reservationsData = await reservationsRes.json();
-        
-        console.log('Rooms data:', roomsData);
-        console.log('Seasons data:', seasonsData);
-        console.log('Reservations data:', reservationsData);
-        
+        console.log('✅ RealtimeBooking Firebase 데이터 가져오기 완료:');
+        console.log('- 객실:', roomsData.length);
+        console.log('- 시즌:', seasonsData.length);
+        console.log('- 공휴일:', holidaysData.length);
+        console.log('- 가격:', pricesData.length);
+        console.log('- 예약:', reservationsData.length);
+
         setRooms(roomsData);
         setSeasons(seasonsData);
         setHolidays(holidaysData);
         setPrices(pricesData);
         setReservations(reservationsData);
-        setLoading(false);
+
       } catch (error) {
-        console.error('Individual endpoint failure:', error);
-        
-        // 대안으로 /db 엔드포인트 시도
-        try {
-          console.log('Trying /db endpoint...');
-          const response = await fetch('http://localhost:3001/db');
-          console.log(`/db response: ${response.status} ${response.ok ? '✅' : '❌'}`);
-          
-          const data = await response.json();
-          console.log('/db data:', data);
-          
-          setRooms(data.rooms || []);
-          setSeasons(data.season || []);
-          setHolidays(data.holiday || []);
-          setPrices(data.price || []);
-          setReservations(data.reservation || []);
-          setLoading(false);
-        } catch (fallbackError) {
-          console.error('Fallback endpoint also failed:', fallbackError);
-          setLoading(false);
-        }
+        console.error('❌ RealtimeBooking Firebase 데이터 가져오기 실패:', error);
+        alert('데이터를 불러오는데 실패했습니다. 페이지를 새로고침해주세요.');
+        // 에러 발생시 재시도를 위해 플래그 리셋
+        hasFetched.current = false;
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchData();
-  }, []);
+    fetchDataFromFirebase();
+
+    // cleanup 함수
+    return () => {
+      console.log('🧹 RealtimeBooking 컴포넌트 cleanup');
+    };
+  }, []); // 빈 의존성 배열로 마운트 시 한 번만 실행
 
   // 룸 타입별 기본 가격을 반환하는 함수
-  const getBaseRoomPrice = (roomId: number): number => {
-    const room = rooms.find(r => r.id === roomId);
+  const getBaseRoomPrice = (roomOriginalId: number): number => {
+    const room = rooms.find(r => r.originalId === roomOriginalId);
     if (!room) return 150000;
     
     const roomNameLower = room.name_eng.toLowerCase();
@@ -228,7 +286,7 @@ const RealtimeBooking: React.FC = () => {
   };
 
   // KST 기준 날짜별 가격 계산 함수
-  const calculateDatePrice = (kstDate: Date, roomId: number): number => {
+  const calculateDatePrice = (kstDate: Date, roomOriginalId: number): number => {
     const dateStr = formatKSTDate(kstDate);
     
     // 공휴일 체크 (KST 기준)
@@ -244,14 +302,14 @@ const RealtimeBooking: React.FC = () => {
       return kstDate >= startDate && kstDate <= endDate;
     });
     
-    const seasonId = currentSeason ? currentSeason.id : 1; // 기본값은 비수기
+    const seasonOriginalId = currentSeason ? currentSeason.originalId : 1; // 기본값은 비수기
     
     // 해당 객실의 가격 정보 찾기
     const priceInfo = prices.find(price => 
-      price.room_id === roomId && price.season_id === seasonId
+      price.room_id === roomOriginalId && price.season_id === seasonOriginalId
     );
     
-    if (!priceInfo) return getBaseRoomPrice(roomId); // 룸 타입별 기본 가격
+    if (!priceInfo) return getBaseRoomPrice(roomOriginalId); // 룸 타입별 기본 가격
     
     if (isHoliday) {
       return priceInfo.holiday_price;
@@ -272,7 +330,7 @@ const RealtimeBooking: React.FC = () => {
     const current = new Date(selectedDates.checkIn);
     
     while (current < selectedDates.checkOut) {
-      const basePrice = calculateDatePrice(current, selectedRoom.id);
+      const basePrice = calculateDatePrice(current, selectedRoom.originalId || 1);
       const additionalPrice = basePrice * 0.2 * bookingForm.additionalGuests;
       total += basePrice + additionalPrice;
       current.setDate(current.getDate() + 1);
@@ -286,14 +344,14 @@ const RealtimeBooking: React.FC = () => {
     if (!selectedRoom) return true;
     
     return !reservations.some(reservation => {
-      if (reservation.room_id !== selectedRoom.id) return false;
+      if (reservation.room_id !== (selectedRoom.originalId || 1)) return false;
       
       // UTC로 저장된 예약 데이터를 KST로 변환하여 비교
       const checkInDate = parseUTCToKST(reservation.check_in_date);
       const checkOutDate = parseUTCToKST(reservation.check_out_date);
       
-      // 체크인 날짜부터 체크아웃 날짜까지 모두 예약 불가
-      return kstDate >= checkInDate && kstDate <= checkOutDate;
+      // 체크인 날짜부터 체크아웃 전날까지만 예약 불가
+      return kstDate >= checkInDate && kstDate < checkOutDate;
     });
   };
 
@@ -435,46 +493,43 @@ const RealtimeBooking: React.FC = () => {
       return;
     }
 
-    // KST 날짜를 UTC 형식으로 변환하여 서버에 저장
-    const newReservation = {
-      customer_name: bookingForm.guestName,
-      phone_number: bookingForm.phoneNumber,
-      room_id: selectedRoom.id,
-      check_in_date: formatDateForServer(selectedDates.checkIn), // UTC로 변환
-      check_out_date: formatDateForServer(selectedDates.checkOut), // UTC로 변환
-      number_of_guests: totalGuests,
-      total_price: calculateTotalPrice()
-    };
-
-    console.log('Sending reservation data (UTC format):', newReservation);
-
     try {
-      const response = await fetch('http://localhost:3001/reservation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newReservation)
-      });
+      // KST 날짜를 UTC 형식으로 변환하여 Firebase에 저장
+      const newReservation = {
+        customer_name: bookingForm.guestName,
+        phone_number: bookingForm.phoneNumber,
+        room_id: selectedRoom.originalId || 1,
+        check_in_date: formatDateForServer(selectedDates.checkIn), // UTC로 변환
+        check_out_date: formatDateForServer(selectedDates.checkOut), // UTC로 변환
+        number_of_guests: totalGuests,
+        total_price: calculateTotalPrice(),
+        created_at: new Date().toISOString() // 생성 시간 추가
+      };
 
-      if (response.ok) {
-        setShowCompleteModal(true);
-        // 3초 후 자동으로 모달 닫고 초기화
-        setTimeout(() => {
-          setShowCompleteModal(false);
-          // 초기화
-          setStep(1);
-          setSelectedRoom(null);
-          setSelectedDates({ checkIn: null, checkOut: null });
-          setBookingForm({ additionalGuests: 0, guestName: '', phoneNumber: '' });
-          setSelectingCheckOut(false);
-        }, 3000);
-      } else {
-        throw new Error('Booking failed');
-      }
+      console.log('🔥 Firebase에 예약 데이터 저장 중 (UTC format):', newReservation);
+
+      // Firebase에 예약 저장
+      const savedReservation = await addReservation(newReservation);
+      console.log('✅ 예약 저장 완료:', savedReservation);
+
+      // 예약 목록 업데이트
+      setReservations(prev => [...prev, savedReservation]);
+
+      setShowCompleteModal(true);
+      // 3초 후 자동으로 모달 닫고 초기화
+      setTimeout(() => {
+        setShowCompleteModal(false);
+        // 초기화
+        setStep(1);
+        setSelectedRoom(null);
+        setSelectedDates({ checkIn: null, checkOut: null });
+        setBookingForm({ additionalGuests: 0, guestName: '', phoneNumber: '' });
+        setSelectingCheckOut(false);
+      }, 3000);
+
     } catch (error) {
-      console.error('Error processing booking:', error);
-      alert('An error occurred while processing your booking. Please try again.');
+      console.error('❌ 예약 저장 실패:', error);
+      alert('예약 처리 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
@@ -490,7 +545,7 @@ const RealtimeBooking: React.FC = () => {
   if (loading) {
     return (
       <div className="realtime-booking-page">
-        <div className="loading">Loading data...</div>
+        <div className="loading">🔥 Loading data from Firebase...</div>
       </div>
     );
   }
@@ -540,9 +595,36 @@ const RealtimeBooking: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* Data Reset Modal - 데이터 리셋 모달 */}
+        {showResetModal && (
+          <div className="modal-overlay">
+            <div className="reset-modal">
+              <h3>중복된 데이터가 감지되었습니다</h3>
+              <p>Firebase 데이터베이스에 중복 데이터가 있습니다. 데이터를 초기화하시겠습니까?</p>
+              <div className="modal-actions">
+                <button 
+                  className="modal-cancel-btn" 
+                  onClick={() => setShowResetModal(false)}
+                >
+                  취소
+                </button>
+                <button 
+                  className="modal-confirm-btn" 
+                  onClick={handleDataReset}
+                >
+                  데이터 리셋
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
+
+  // 2단계와 3단계는 기존 코드와 동일하므로 생략...
+  // 나머지 렌더링 로직은 기존과 동일합니다.
 
   // 2단계: 날짜 선택 화면
   if (step === 2) {
@@ -572,7 +654,7 @@ const RealtimeBooking: React.FC = () => {
                   <p className="room-description">{selectedRoom?.desc}</p>
                   <div className="room-price">
                     <span className="price-label">Base rate per night</span>
-                    <span className="price">{selectedDates.checkIn ? calculateDatePrice(selectedDates.checkIn, selectedRoom.id).toLocaleString() : getBaseRoomPrice(selectedRoom.id).toLocaleString()} KRW</span>
+                    <span className="price">{selectedDates.checkIn ? calculateDatePrice(selectedDates.checkIn, selectedRoom.originalId || 1).toLocaleString() : getBaseRoomPrice(selectedRoom.originalId || 1).toLocaleString()} KRW</span>
                   </div>
                 </div>
                 
@@ -685,7 +767,7 @@ const RealtimeBooking: React.FC = () => {
           </div>
         </section>
 
-        {/* Warning Modal - 7일 이상 예약 경고 */}
+        {/* Warning Modal - 6일 이상 예약 경고 */}
         {showWarningModal && (
           <div className="modal-overlay">
             <div className="warning-modal">
