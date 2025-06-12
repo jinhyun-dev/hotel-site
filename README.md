@@ -34,7 +34,7 @@ A responsive hotel booking website built with React, designed for global users t
 git clone https://github.com/jinhyun-dev/hotel-site.git
 cd hotel-project
 npm install
-npm start
+npm run dev
 
 ## 📦 Deployment
 TBD or add Vercel/Netlify URL later
